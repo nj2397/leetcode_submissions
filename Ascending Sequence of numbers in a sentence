@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool areNumbersAscending(string s) {
+        stringstream ss;
+        ss<<s;
+        
+        string temp;
+        int found;
+        int k=0;
+        while(!ss.eof())
+        {
+            ss>>temp;
+            if(stringstream(temp) >> found)
+            {
+                if(found>k)
+                    k=found;
+                else
+                    return false;
+            }
+            temp = "";
+        }
+        return true;
+    }
+};
