@@ -1,0 +1,52 @@
+class Solution{
+public:
+	int value(char c){
+		if(c == 'I')
+			return 1;
+		if(c == 'V')
+			return 5;
+		if(c == 'X')
+			return 10;
+		if(c == 'L')
+			return 50;
+		if(c == 'C')
+			return 100;
+		if(c == 'D')
+			return 500;
+		if(c == 'M')
+			return 1000;
+		return -1;
+	}
+
+	int romanToInt(string s) {
+		transform(s.begin(), s.end(), s.begin(), ::toupper);
+		
+		int sum = 0;
+		stack<int> st;
+		st.push('#');
+		
+		for(auto ele: s){
+			int num = value(ele);
+			if(st.top() == '#'){
+				st.push(num);
+				continue;
+			}
+	
+			if(st.top() < num){
+				num -= st.top();
+				st.pop();
+				st.push(num);
+				continue;
+			}
+			
+			st.push(num);
+		}
+		
+		while(st.top() != '#'){
+			sum += st.top();
+			st.pop();
+		}
+		return sum;
+	}
+
+};
