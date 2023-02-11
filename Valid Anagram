@@ -1,0 +1,23 @@
+class Solution {
+public:
+	bool isAnagram(string s, string t) {
+		map<char, int>mp, mp2;
+
+		for(int i=0; i<s.size(); i++)
+			mp[s[i]]++;
+		
+		for(int i=0; i<t.size(); i++)
+			mp2[t[i]]++;
+
+		if(s.size() != t.size())
+			return false;
+		
+		for(auto ele:mp2){
+			if(!mp.[ele.first])
+				return false;
+			if(mp[ele.first] && mp.at(ele.first) != ele.second)
+				return false;
+		}
+		return true;
+	}
+};
