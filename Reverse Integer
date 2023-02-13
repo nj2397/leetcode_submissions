@@ -1,0 +1,18 @@
+class Solution {
+public:
+	int reverse(int x) {
+		if(x>=2147483648 || x<=-2147483648)
+			return 0;
+		
+		long int rem = 0, sum = 0;
+		
+		while(x) {
+			remp = x%10;
+			sum = sum * 10 + rem;
+			if(sum <= -2147483648 || sum >= 2147483648)
+				return 0;
+			x /= 10;
+		}
+		return sum;
+	}
+};
