@@ -1,0 +1,25 @@
+class Solution {
+public:
+	bool isPlaindrome(ListNode *head) {
+		stack<int>st;
+
+		ListNode *temp = head;
+
+		while(temp != NULL){
+			st.push(temp->val);
+			temp = temp->next;
+		}
+		
+		temp = head;
+		
+		while(!st.empty() && temp != NULL){
+			int x = st.top();
+			if(temp -> val != x)
+				return false;
+			st.pop();
+			temp = temp->next;
+		}
+
+		return true;
+	}
+};
