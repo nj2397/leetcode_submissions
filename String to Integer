@@ -1,0 +1,35 @@
+class Solution {
+public: 
+	int myAtoi(string s) {
+		bool flag = false;
+		int i=0;
+
+		long int num = 0;
+		
+		while(s[i] == ' ')
+			i++;
+		
+		if(s[i] == '-'){
+			flag = true;
+			i++;
+		}
+		
+		if(flag == false && s[i] == '+')
+			i++;
+
+		while(s[i] >='0' && s[i] <= '9' && s[i] != ' ' && i<s.size()){
+			num = (num*10) + (s[i]-'0');
+		
+			if(flag == false && num > INT_MAX)
+				return INT_MAX;
+			
+			if(flag == true && (-1*num) < INT_MIN)
+				return INT_MIN;
+			i++;
+		}
+		
+		if(flag == true)
+			num *= -1;
+		return num;
+	}
+};
