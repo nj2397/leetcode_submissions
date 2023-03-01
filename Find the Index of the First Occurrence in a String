@@ -1,0 +1,18 @@
+class Solution {
+public: 
+	int strStr(string haystack, string needle) {
+		int start = 0, finish = needle.length() - 1, index;
+		string ns;
+		
+		while(finish < haystack.length()) {
+			ns = "";
+			for(int i = start; i <= finish; i++)
+				ns += haystack[i];
+			if(ns == needle)
+				return start;
+			start++;
+			finish++;
+		}
+		return -1;
+	}
+};
