@@ -1,0 +1,34 @@
+class Solution {
+public:
+	string greatestLetter(string s) {
+		set<char>s1, s2;
+			
+		for(int i=0; i<s.length(); i++) {
+			if(s[i] == toupper(s[i])
+				s1.insert(s[i]);
+			else
+				s2.insert(s[i]);
+		}
+		
+		char ch;
+		string ns="";
+		
+		for(int i=0; i<s.length(); i++) {
+			if(s[i] == toupper(s[i]) && !ch)
+				ch = s[i];
+			else if(s[i] == toupper(s[i])) {
+				if(s2.find(tolower(s[i])) != s2.end() && s[i] > ch)
+					ch = s[i];
+			}
+			else 
+				continue;
+		}
+		
+		if(s2.find(tolower(ch)) != s2.end()) {
+			ns += ch;
+			return ns;
+		}
+		else
+			return "";
+	}
+};
