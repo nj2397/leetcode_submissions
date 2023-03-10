@@ -1,0 +1,17 @@
+class Solution {
+public: 
+	int mySqrt(int x) {
+		int start = 1, finish = x;
+
+		while(start <= finish) {
+			int mid = start + (finish - start)/2;
+			if(mid == x/mid)
+				return mid;
+			if(mid > x/mid)
+				finish = mid - 1;
+			else
+				start = mid + 1;
+		}
+		return finish;
+	}
+};
