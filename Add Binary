@@ -1,0 +1,56 @@
+class Solution {
+public: 
+	int sumBin(char c, char d) {
+		if(c-'0' == 1 && d-'0' == 1)
+			return 10;
+		if(c-'0' == 1 && d-'0' == 0)
+			return 1;
+		if(c-'0' == 0 && d-'0' == 1)
+			return 1;
+		return 0;
+	}
+	string addBinary(string a, string b) {
+		reverse(a.begin(), a.end());
+		reverse(b.begin(), b.end());
+		
+		int n;
+		if(a.length() >= b.length())
+			n = a.length();
+		else
+			n = b.length();
+		
+		int result = 0, carry = 0;
+		string ns = "";
+			
+		for(int i=0; i<n; i++) {
+			if(i >= a.length()) {
+				result = sumbin(b[i], carry + '0');
+				carry = result / 10;
+				result %= 10;
+				ns += result + '0';
+				continue;
+			}
+			
+			if(i >= b.length()) {
+				result = sumBin(a[i], carry + '0');
+				carry = result / 10;
+				result %= 10;
+				ns += result + '0';
+				continue;
+			}
+			
+			result = sumBin(a[i], b[i]) + carry;
+			if(result == 2)
+				result = 10;
+			carry = result / 10;
+			result %= 10;
+			ns += result + '0';
+		}
+		
+		if(carry)
+			ns += carry + '0';
+		
+		reverse(ns.begin(), ns.end());
+		return ns;
+	}
+};
