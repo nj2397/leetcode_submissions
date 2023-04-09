@@ -1,0 +1,39 @@
+class Solution{
+public: 
+	ListNode *swapPairs(ListNode *head) {
+		ListNode *curr = head;
+		if(curr == NULL || curr->next == NULL) {
+			return head;
+		}
+
+		ListNode *later, *former;
+		
+		later = curr->next;
+		curr->next = later->next;
+		later->next = curr;
+		curr = curr->next;
+		
+		former = later;
+		
+		head = former;
+		former = former->next;
+		
+		if(curr == NULL)
+			return head;
+		
+		while(curr->next != NULL) {
+			later = curr->next;
+			curr->next = later->next;
+			later->next = curr;
+			
+			former->next = later;
+			curr = curr->next;
+			if(curr == NULL)
+				break;
+		
+			former = former->next->next;
+		}
+		
+		return head;
+	}
+};
