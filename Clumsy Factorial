@@ -1,0 +1,40 @@
+class solution {
+public:
+	int calculate(int index, int a, int b) {
+		if(index % 4 == 0)
+			return a*b;
+		if(index % 4 == 1)
+			return a/b;
+		if(index % 4 == 2)
+			return a+b;
+		return -1;
+	}
+	
+	int clumsy(int n) {
+		stack<int>st;
+		st.push(n);
+		int op = 0;
+		
+		while(--n >= 1) {
+			if(op % 4 == 3) {
+				st.push((-1)*n);
+				op++;
+				continue;	
+			}
+			
+			int top = st.top();
+			st.pop();
+			st.push(calculate(op, top, n));
+			op++;
+		}
+
+		int result = 0;
+		
+		while(!st.empty()) {
+			result += st.top();
+			st.pop();
+		}
+		
+		return result;
+	}
+};
