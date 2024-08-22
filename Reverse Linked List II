@@ -1,0 +1,163 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+typedef struct node {
+    int data;
+    struct node *next;
+}Node;
+
+Node * head = nullptr;
+
+void insertIntoList(int ele) {
+    Node * newnode = new Node();
+
+    newnode -> data = ele;
+    newnode -> next = nullptr;
+
+
+    if (head == nullptr) {
+        head = newnode;
+        return;
+    }
+
+    Node * temp = head;
+
+    while (temp -> next != nullptr)
+        temp = temp->next;
+
+    temp->next = newnode;
+
+    return;
+
+}
+
+void displayList() {
+    Node * temp = head;
+
+    while(temp != nullptr) {
+        cout<<temp -> data<<" ";
+        temp = temp -> next;
+    }
+
+    return;
+
+}
+
+
+void freeList(){
+    Node * temp;
+
+    while (head != nullptr) {
+        temp = head;
+        head = head -> next;
+        free(temp);
+    }
+
+    return;
+}
+
+
+void reverseList(int left, int right) {
+
+    if (left == right)
+        return;
+
+    Node * leftSearchNode = nullptr;
+    Node * leftSearchNodeHolder = nullptr;
+
+    int count = 0;
+
+    leftSearchNode = head;
+
+    while (leftSearchNode != nullptr) {
+
+        count++;
+
+        if (count  == left)
+            break;
+
+        leftSearchNodeHolder = leftSearchNode;
+        leftSearchNode = leftSearchNode -> next;
+    }
+
+    if (leftSearchNode == nullptr)
+        exit(0);
+
+
+    Node * rightSearchNode = nullptr;
+    Node * rightSearchNodeHolder = nullptr;
+
+    rightSearchNode = leftSearchNode;
+    rightSearchNodeHolder = rightSearchNode->next;
+
+    while (rightSearchNode != nullptr) {
+        rightSearchNode = rightSearchNode -> next;
+        count++;
+
+        if (count == right) {
+            rightSearchNodeHolder = rightSearchNodeHolder -> next;
+            break;
+        }
+
+        rightSearchNodeHolder = rightSearchNodeHolder -> next;
+    }
+
+    if (rightSearchNode == nullptr)
+        exit(0);
+
+    rightSearchNode->next = nullptr;
+
+    Node * prev = nullptr;
+    Node * current = leftSearchNode;
+    Node * nextNode = nullptr;
+
+    while (current != nullptr) {
+        nextNode = current -> next;
+        current -> next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+
+    if (leftSearchNodeHolder == nullptr){
+        leftSearchNodeHolder = prev;
+        head = leftSearchNodeHolder;
+    } else leftSearchNodeHolder->next = prev;
+
+    Node * temp = leftSearchNodeHolder;
+
+    while (temp->next != nullptr)
+            temp = temp->next;
+
+    temp->next = rightSearchNodeHolder;
+
+    return;
+
+}
+
+
+
+int main ()
+{
+    int n;
+    cin>>n;
+
+    for(int i=0; i<n; i++) {
+        int ele;
+        cin>>ele;
+        insertIntoList(ele);
+    }
+
+    int left, right;
+
+    cin>>left>>right;
+
+    reverseList(left, right);
+    displayList();
+
+    freeList();
+
+    return 0;
+}
+
