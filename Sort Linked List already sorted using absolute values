@@ -1,0 +1,125 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+typedef struct node {
+
+    int data;
+    struct node * next;
+
+} Node;
+
+Node * head = nullptr;
+
+void insertIntoList (int ele) {
+
+    Node * newnode = new Node();
+
+    newnode -> data = ele;
+    newnode -> next = nullptr;
+
+    if (head == nullptr) {
+        head = newnode;
+        return;
+    }
+
+    Node * temp = head;
+
+    while (temp -> next != nullptr)
+        temp = temp -> next;
+
+    temp -> next = newnode;
+
+    return;
+
+}
+
+void sortAbsoluteValues () {
+
+    Node * leftPointer = nullptr;
+    Node * rightPointer = nullptr;
+
+    Node * newnode = new Node();
+
+    Node * temp = head;
+
+    newnode -> data = temp -> data;
+    newnode -> next = nullptr;
+
+    leftPointer = newnode;
+    rightPointer = newnode;
+
+    temp = temp -> next;
+
+    while ( temp != nullptr ) {
+        Node * newnode = new Node();
+
+        if (temp -> data < leftPointer -> data) {
+            newnode -> data = temp -> data;
+            newnode -> next = leftPointer;
+            leftPointer = newnode;
+        } else {
+            newnode -> data = temp -> data;
+            newnode -> next = nullptr;
+            rightPointer -> next = newnode;
+            rightPointer = newnode;
+        }
+
+        temp = temp -> next;
+    }
+
+    head = leftPointer;
+
+    return;
+
+}
+
+void displayList() {
+
+    Node * temp = head;
+
+    while (temp != nullptr) {
+        cout << temp -> data << " ";
+        temp = temp -> next;
+    }
+
+    return;
+
+}
+
+void freeList() {
+
+    Node * temp = nullptr;
+
+    while (head != nullptr) {
+        temp = head;
+        head = head -> next;
+        delete temp;
+    }
+
+    return;
+
+}
+
+
+int main()
+{
+    int n;
+
+    cin >> n;
+
+    for (int i=0; i<n; i++) {
+        int ele;
+        cin >> ele;
+        insertIntoList(ele);
+    }
+
+    sortAbsoluteValues();
+
+    displayList();
+
+    freeList();
+
+    return 0;
+}
+
