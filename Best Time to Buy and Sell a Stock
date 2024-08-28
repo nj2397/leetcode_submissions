@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+
+        int buyPoint = 0, maxProfit = 0;
+
+        for(int i=1; i<prices.size(); i++) {
+            if (prices[i] < prices[buyPoint]) {
+                buyPoint = i;
+                continue;
+            }
+            maxProfit = max (maxProfit, prices[i] - prices[buyPoint]);
+        }
+
+        return maxProfit;
+    }
+};

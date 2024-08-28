@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int sum = 0, maxSum = -10000;
+
+        for (auto ele: nums) {
+            sum += ele;
+
+            maxSum = max(sum, maxSum);
+
+            sum = max(sum, 0);            
+        }
+
+        return maxSum;
+    }
+};
